@@ -6,8 +6,8 @@ const validateEverything = require('./validators/validateEverything')
 const verifyRegistration = (req, res, next) => {
 
     try{
-    
-        if ( ! (validateEverything(req) [0]) ){
+        const [ everythingAlright, missing] = validateEverything(req)
+        if ( !everythingAlright  ){
             res.status(400)
             res.json(({"message" : "Incomplete request", "missing" : missing}))
             res.send()
