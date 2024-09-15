@@ -1,10 +1,11 @@
 const express = require('express')
-
 const router = express.Router()
 
+const EventController = require('../controllers/EventController')
 
-router.post('/full', async(req, res)=>{
-    
+
+router.post('/meta', async(req, res)=>{
+    EventController.meta(req,res)
 })
 
 

@@ -1,6 +1,6 @@
 const verifier = require('../middleware/verifyMiddleware')
 const Participant = require('../models/Participant')
-
+const Event = require('../models/Event')
 
 
 exports.register = async (req ,res) => {
@@ -19,7 +19,12 @@ exports.register = async (req ,res) => {
             transactionID : transactionID
         }) 
         
-        await newParticipant.save()
+        await Promise.all(
+            events.map(async (event) => {
+              await Event.findOneAndUpdate({ name: event }, { $inc: { currentCount: 1 } }, { new: true });
+            })
+          );
+
         console.log("Registration Successful")
         res.status(200)
         res.json( {"message" : "Registration Successful"})
