@@ -16,8 +16,7 @@ exports.register = async (req ,res) => {
             college : college,
             events : events,
             transactionLink : transactionLink,
-            transactionID : transactionID,
-            verified : false
+            transactionID : transactionID
         }) 
         
         await newParticipant.save()
