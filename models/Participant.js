@@ -6,7 +6,9 @@ const schema = new mongoose.Schema(
         email : { type: String, required : true},        
         phone : { type: String, required : true},
         college : { type: String, required : true},
+        year : { type : Number, required : true},
         events : { type : [String], required : true},
+        amount : { type : Number, required : true },
         transactionLink : { type: String, required : true},
         transactionID : { type: String, required : true}
     

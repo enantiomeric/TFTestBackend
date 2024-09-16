@@ -5,8 +5,9 @@ const router = express.Router()
 const participantController = require('../controllers/ParticipantController')
 
 const verifyMiddleware = require('../middleware/verifyMiddleware')
+const typesMiddleware = require('../middleware/typesMiddleware')
 
-router.post('/register', verifyMiddleware ,async(req, res)=>{
+router.post('/register', verifyMiddleware, typesMiddleware ,async(req, res)=>{
     participantController.register(req, res)
 })
 
