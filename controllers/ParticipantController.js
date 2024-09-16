@@ -25,6 +25,8 @@ exports.register = async (req ,res) => {
             })
           );
 
+        newParticipant.save()
+
         console.log("Registration Successful")
         res.status(200)
         res.json( {"message" : "Registration Successful"})

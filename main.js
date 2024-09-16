@@ -13,6 +13,7 @@ const dotenv = require('dotenv').config()
 
 app.use(cors())
 app.use(express.json({ strict: true }));
+// app.use(express.json())
 db()
 
 
