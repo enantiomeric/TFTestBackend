@@ -61,7 +61,8 @@ router.post('/uploadimage', upload.single('transactionImage'), async (req, res) 
     if( success){
         res.json({ "transactionLink" : link}) 
     }else{
-        res.send("Failed to upload")
+        res.status(400)
+        res.send("Image Rejected. Check Format.")
     }
 
     } catch (error) {
