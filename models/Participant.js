@@ -11,7 +11,6 @@ const schema = new mongoose.Schema(
         amount : { type : Number, required : true },
         transactionLink : { type: String, required : true},
         transactionID : { type: String, required : true}
-    
     }
 )
 

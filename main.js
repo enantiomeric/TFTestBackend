@@ -12,7 +12,8 @@ const EventRouter = require('./routes/EventRouter')
 const dotenv = require('dotenv').config()
 
 app.use(cors())
-app.use(express.json({ strict: true }));
+app.use(express.json({ strict: true,limit: '5mb' }));  // Increase the limit as needed
+
 // app.use(express.json())
 db()
 

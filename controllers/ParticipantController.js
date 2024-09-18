@@ -1,12 +1,16 @@
 const Participant = require('../models/Participant')
 const Event = require('../models/Event')
+const cloudinary = require("../config/cloudinary");
+const fs = require('fs')
 
 
 exports.register = async (req ,res) => {
 
     try{
 
-        const { name, email, phone, college, year, events, amount, transactionLink, transactionID } = req.body
+        const { name, email, phone, college, year, events, amount, transactionLink ,transactionID } = req.body
+
+        
         const newParticipant = new Participant({
             name : name,
             email : email,
@@ -40,3 +44,5 @@ exports.register = async (req ,res) => {
     }
 
 }
+
+

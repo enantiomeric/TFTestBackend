@@ -20,6 +20,7 @@ const verifyRegistration = (req, res, next) => {
             res.json(({"message" : "Incorrect Phone Number",}))
             res.send()
         }else if( !validateEvents(req.body.events)){
+            console.log("HERE:", req.body)
             res.status(400)
             res.json({ 
                 "message" : "Incorrect Events Array. Check below array of Valid Events. Length shouldn't exceed 4 with no duplicates ", 

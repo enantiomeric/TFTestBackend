@@ -1,4 +1,5 @@
 function validateEvents(events) {
+    
     const validEvents = ["CodeCrush", "CodeDuet", "CloudVerse", "Bid2Build"];
     if (events.length > 4) {
         return false;

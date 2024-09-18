@@ -8,8 +8,8 @@ function validateEverything( req ){
     if(!(req.body.year)){ missing.push("year")}
     if(!(req.body.events)){ missing.push("events")}
     if(!(req.body.amount)){ missing.push("amount")}
-    if(!(req.body.transactionLink)){ missing.push("transactionLink")}
     if(!(req.body.transactionID)){ missing.push("transactionID")}
+    if(!(req.body.transactionLink)){ missing.push("transactionLink")}
 
     if (missing.length === 0 ){
         return [ true, missing ]
