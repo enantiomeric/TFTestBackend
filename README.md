@@ -2,6 +2,18 @@
 
 Backend for Techfusion Website 2k24.
 
+#### Image Upload Format
+
+```
+POST /participant/uploadimage 
+form-data
+
+
+transactionImage : [FILE]
+
+
+```
+
 #### Registration Format 
 
 ```
