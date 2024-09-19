@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+
+
 const schema = new mongoose.Schema(
     {
         name  : { type: String, required : true},
@@ -12,7 +14,8 @@ const schema = new mongoose.Schema(
         transactionLink : { type: String, required : true},
         transactionID : { type: String, required : true},
         verified : { type : Boolean, required : true},
-        UID : { type : Number, required : false}
+        PID : { type : Number, required : false},
+        UUID : { type : String, required : false}
     }
 )
 

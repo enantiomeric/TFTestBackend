@@ -1,5 +1,6 @@
 const Participant = require('../models/Participant')
 const Event = require('../models/Event')
+const {v4 : UUID } = require('uuid')
 
 
 exports.register = async (req ,res) => {
@@ -20,7 +21,8 @@ exports.register = async (req ,res) => {
             transactionLink : transactionLink,
             transactionID : transactionID,
             verified : false,
-            UID : -1
+            PID : -1,
+            UUID : UUID()
         }) 
         await Promise.all(
             events.map(async (event) => {
