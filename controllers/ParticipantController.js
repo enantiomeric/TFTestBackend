@@ -1,7 +1,5 @@
 const Participant = require('../models/Participant')
 const Event = require('../models/Event')
-const cloudinary = require("../config/cloudinary");
-const fs = require('fs')
 
 
 exports.register = async (req ,res) => {
@@ -20,16 +18,16 @@ exports.register = async (req ,res) => {
             events : events,
             amount : amount,
             transactionLink : transactionLink,
-            transactionID : transactionID
+            transactionID : transactionID,
+            verified : false,
+            UID : -1
         }) 
         await Promise.all(
             events.map(async (event) => {
               await Event.findOneAndUpdate({ name: event }, { $inc: { currentCount: 1 } }, { new: true });
             })
           );
-        console.log("HERE")        
         await newParticipant.save()
-        console.log("HERE")        
 
 
         console.log("Registration Successful")
@@ -44,5 +42,3 @@ exports.register = async (req ,res) => {
     }
 
 }
-
-

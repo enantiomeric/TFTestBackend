@@ -18,10 +18,19 @@ router.post('/register', verifyMiddleware, typesMiddleware ,  async(req, res)=>{
 
 // Screenshot Router 
 
-const storage = multer.memoryStorage(); 
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
-
-router.post('/uploadimage', upload.single('transactionImage'), async (req, res) => {
+const MulterErrorMiddleware = (err, req, res, next) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ message: 'Invalid file upload: ' + err.message });
+    } else if (err) {
+      return res.status(500).json({ message: 'File upload error: ' + err.message });
+    }
+    next();
+  };
+  
+  
+router.post('/uploadimage', upload.single('transactionImage'), MulterErrorMiddleware ,async (req, res) => {
     try {
 
       if (!req.file) {
@@ -71,6 +80,7 @@ router.post('/uploadimage', upload.single('transactionImage'), async (req, res) 
     }
   });
   
+
   
 
 module.exports = router
