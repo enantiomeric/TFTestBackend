@@ -32,3 +32,20 @@ POST /participant/register
 }
 
 ```
+
+
+### Docker Run Example
+```
+docker run \
+  -e DB_URI=mongodb://localhost:27017/Techfusion \
+  -e CLOUD_NAME=name \
+  -e API_KEY=123 \
+  -e API_SECRET=abc \
+  -e JWT_SECRET="123" \
+  -e PORT=443 \
+  -v /home/ubuntu/certificates:/home/certificates \
+  -v /home/ubuntu/logs:/home/logs \
+  -p 443:443 \
+  <image_name>
+
+````
