@@ -13,13 +13,13 @@ const AdminRouter = require("./routes/AdminRouter")
 
 
 const logger = require('./config/logger')
-const loggerMiddleware = require('./middleware/loggerMiddleware')
+// const loggerMiddleware = require('./middleware/loggerMiddleware')
 
 const dotenv = require('dotenv').config()
 
 app.use(cors())
 app.use(express.json({ strict: true,limit: '5mb' }));  
-app.use(loggerMiddleware)
+// app.use(loggerMiddleware)
 
 const sslOptions = {
     key: fs.readFileSync(path.join(__dirname,"certificates" ,'server.key')),
