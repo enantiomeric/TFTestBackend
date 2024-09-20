@@ -43,8 +43,8 @@ docker run \
   -e API_SECRET=abc \
   -e JWT_SECRET="123" \
   -e PORT=443 \
-  -v /home/ubuntu/certificates:/home/certificates \
-  -v /home/ubuntu/logs:/home/logs \
+  -v /home/ubuntu/certificates:/app/certificates \
+  -v /home/ubuntu/logs:/app/logs \
   -p 443:443 \
   <image_name>
 
