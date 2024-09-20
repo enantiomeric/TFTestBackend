@@ -2,6 +2,7 @@ const validateEmail = require('./validators/validateEmail')
 const validatePhone = require('./validators/validatePhone')
 const validateEvents = require('./validators/validateEvents')
 const validateEverything = require('./validators/validateEverything')
+const logger = require('../config/logger')
 
 const verifyRegistration = (req, res, next) => {
 
@@ -36,8 +37,8 @@ const verifyRegistration = (req, res, next) => {
 
     }catch(error){
         console.log("An Error Occured : verifyMiddleware")
-        console.log(req)
         console.log(error)
+        logger.writeLog(error)
         res.status(500)
         res.json({"message" : "Internal Server Error"})
         res.send()

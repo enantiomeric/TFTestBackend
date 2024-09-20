@@ -6,7 +6,8 @@ const schema = new mongoose.Schema(
         event : { type : mongoose.Schema.Types.ObjectId , ref : "Event" , required : true},
         participant : { type : mongoose.Schema.Types.ObjectId , ref : "Participant" , required : true },
         markingAdmin : { type : mongoose.Schema.Types.ObjectId , ref : "Admin", required : true },
-        time : { type : Date, required : false}
+        time : { type : Date, required : false},
+        UUID : { type : String, required : true }
 
     }
 )

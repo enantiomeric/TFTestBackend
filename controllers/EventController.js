@@ -1,4 +1,5 @@
 const Event = require('../models/Event')
+const logger = require('../config/logger')
 
 
 exports.meta = async (req, res)=>{
@@ -27,7 +28,7 @@ exports.meta = async (req, res)=>{
     }catch( error ){
         console.log("An Error Occured : EventController")
         console.log(error)
-        
+        logger.writeLog(error)
     }
 
 

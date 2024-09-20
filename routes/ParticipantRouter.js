@@ -7,8 +7,9 @@ const typesMiddleware = require('../middleware/typesMiddleware')
 const cloudinary = require('cloudinary')
 const multer = require('multer');
 
+const logger = require('../config/logger')
 
-router.post('/register', verifyMiddleware, typesMiddleware ,  async(req, res)=>{
+router.post('/register',  typesMiddleware, verifyMiddleware ,  async(req, res)=>{
     participantController.register(req, res)
 })
 
@@ -22,9 +23,12 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 const MulterErrorMiddleware = (err, req, res, next) => {
     if (err instanceof multer.MulterError) {
-      return res.status(400).json({ message: 'Invalid file upload: ' + err.message });
+      logger.writeLog(err.message)
+      console.log(err.message)
+      return res.status(400).json({ message: 'Invalid file upload' })
     } else if (err) {
-      return res.status(500).json({ message: 'File upload error: ' + err.message });
+      logger.writeLog(err.message)
+      return res.status(500).json({ message: 'File upload error: ' }) 
     }
     next();
   };
@@ -62,6 +66,7 @@ router.post('/uploadimage', upload.single('transactionImage'), MulterErrorMiddle
         } catch (error) {
             console.log("error in cloudinary upload")
             console.log(error);
+            logger.writeLog(error);
             return { success: false, link: "" };
         }
     };
@@ -76,6 +81,7 @@ router.post('/uploadimage', upload.single('transactionImage'), MulterErrorMiddle
 
     } catch (error) {
       console.error('Image upload failed:', error);
+      logger.writeLog(error)
       res.status(500).json({ message: 'Image upload failed' });
     }
   });

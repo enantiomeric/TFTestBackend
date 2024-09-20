@@ -1,3 +1,5 @@
+const logger = require('../config/logger')
+
 const mongoose = require('mongoose')
 
 // mongoose.connect(URI)
@@ -12,6 +14,7 @@ const db = async () =>{
         }catch( e ){
             console.log("DB Connection Error")
             console.log(e)
+            logger.writeLog(e)
             return null
         }
         

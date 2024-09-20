@@ -1,5 +1,6 @@
+const logger = require('../config/logger')
+
 const typesMiddleware = (req, res, next) => {
-    const { name, email, phone, college, year, events, amount, transactionLink, transactionID } = req.body;
 
     const expectedTypes = {
         name: 'string',
@@ -12,16 +13,26 @@ const typesMiddleware = (req, res, next) => {
         transactionLink: 'string',
         transactionID: 'string'
     };
-    for (const field in expectedTypes) {
-        if (req.body[field] !== undefined && typeof req.body[field] !== expectedTypes[ field ]) {
-            return res.status(400).json({ message: `Invalid type for ${field}. Expected ${expectedTypes[ field ]}.` });
+    try{
+        if (req.events && !Array.isArray(req.events)) {
+            return res.status(400).json({ message: "Invalid type for events. Expected an array." });
         }
-    }
-    if (events && !Array.isArray(events)) {
-        return res.status(400).json({ message: "Invalid type for events. Expected an array." });
-    }
+        for (const field in expectedTypes) {
+            if (req.body[field] !== undefined && typeof req.body[field] !== expectedTypes[ field ]) {
+                return res.status(400).json({ message: `Invalid type for ${field}. Expected ${expectedTypes[ field ]}.` });
+            }
+        }
 
     next(); 
+
+    }catch( e ){
+        console.log("Error" )
+        console.log(e)
+        logger.writeLog(e)
+        res.status(500)
+        res.send("Internal Server Error")
+    }
+
 };
 
 module.exports = typesMiddleware;
