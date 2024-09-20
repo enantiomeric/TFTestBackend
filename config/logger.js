@@ -4,28 +4,31 @@ const os = require('os')
 const util = require('util')
 const logFilePath = path.join(__dirname, '..', 'logs', 'backend.log');
 
-const writeLog = (...data) => {
-    try {
-        const logMessage = data.map(item => {
-            if (typeof item === 'object') {
-                return util.inspect(item, { depth: null, colors: false });
-            } else if (item instanceof Error) {
-                return `${item.message}\n${item.stack}`;
-            }
-            return String(item); 
-        }).join(' ');
+// const writeLog = (...data) => {
+//     try {
+//         const logMessage = data.map(item => {
+//             if (typeof item === 'object') {
+//                 return util.inspect(item, { depth: null, colors: false });
+//             } else if (item instanceof Error) {
+//                 return `${item.message}\n${item.stack}`;
+//             }
+//             return String(item); 
+//         }).join(' ');
 
-        const logEntry = `[${new Date().toISOString()}] ${logMessage}${os.EOL}`;
+//         const logEntry = `[${new Date().toISOString()}] ${logMessage}${os.EOL}`;
 
-        fs.appendFile(logFilePath, logEntry, (err) => {
-            if (err) {
-                console.error('Error writing to log file', err);
-            }
-        });
-    } catch (err) {
-        console.error('Error in writeLog function', err);
-    }
-};
+//         fs.appendFile(logFilePath, logEntry, (err) => {
+//             if (err) {
+//                 console.error('Error writing to log file', err);
+//             }
+//         });
+//     } catch (err) {
+//         console.error('Error in writeLog function', err);
+//     }
+// };
+const writeLog= (...data) =>{
+    
+}
 
 const readLog = async () => {
     try {
