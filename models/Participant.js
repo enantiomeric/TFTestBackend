@@ -12,6 +12,7 @@ const schema = new mongoose.Schema(
         events : { type : [String], required : true},
         amount : { type : Number, required : true },
         transactionLink : { type: String, required : true},
+        IDCardLink : { type : String, required : true},
         transactionID : { type: String, required : true},
         verified : { type : Boolean, required : true},
         PID : { type : Number, required : false},

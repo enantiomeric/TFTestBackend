@@ -8,7 +8,7 @@ exports.register = async (req ,res) => {
 
     try{
 
-        const { name, email, phone, college, year, events, amount, transactionLink ,transactionID } = req.body
+        const { name, email, phone, college, year, events, amount, transactionLink ,transactionID, IDCardLink } = req.body
 
         
         const newParticipant = new Participant({
@@ -21,6 +21,7 @@ exports.register = async (req ,res) => {
             amount : amount,
             transactionLink : transactionLink,
             transactionID : transactionID,
+            IDCardLink : IDCardLink,
             verified : false,
             PID : -1,
             UUID : UUID()

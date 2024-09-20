@@ -10,7 +10,7 @@ function validateEverything( req ){
     if(!(req.body.amount)){ missing.push("amount")}
     if(!(req.body.transactionID)){ missing.push("transactionID")}
     if(!(req.body.transactionLink)){ missing.push("transactionLink")}
-
+    if(!(req.body.IDCardLink)){missing.push("IDCardLink")}
     if (missing.length === 0 ){
         return [ true, missing ]
     }else{

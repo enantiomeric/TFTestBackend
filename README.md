@@ -27,6 +27,7 @@ POST /participant/register
     "year" : 2,
     "events" : [ "CodeCrush","CloudVerse","CodeDuet","Bid2Build"],
     "amount" : 200,
+    "IDCardLink" : "{ID Photo Link}"
     "transactionLink" : "{screenshot link}",
     "transactionID" : "1234"
 }
