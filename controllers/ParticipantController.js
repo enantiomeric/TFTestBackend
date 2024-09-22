@@ -24,7 +24,9 @@ exports.register = async (req ,res) => {
             IDCardLink : IDCardLink,
             verified : false,
             PID : -1,
-            UUID : UUID()
+            UUID : UUID(),
+            codeDuetTeammate : req.body.codeDuetTeammate ? req.body.codeDuetTeammate : "",
+            bidtoBuildTeammates : req.body.bidtoBuildTeammates ? req.body.bidtoBuildTeammates : []
         }) 
         try{
 

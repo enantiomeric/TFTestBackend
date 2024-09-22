@@ -16,7 +16,9 @@ const schema = new mongoose.Schema(
         transactionID : { type: String, required : true},
         verified : { type : Boolean, required : true},
         PID : { type : Number, required : false},
-        UUID : { type : String, required : false}
+        UUID : { type : String, required : false},
+        codeDuetTeammate : { type : String, required: false},
+        bidtoBuildTeammates : { type : [String], required : false}
     }
 )
 
