@@ -10,6 +10,7 @@ const logger = require('../config/logger')
 exports.signUp = async (req, res) => {
     
     try {
+        console.log("HERE")
         const { name, email, post, password } = req.body;
         const existingAdmin = await Admin.findOne({ email });
         if (existingAdmin) return res.status(400).json({ message: "Admin member already exists" });
@@ -139,6 +140,7 @@ exports.deleteAttendance = async (req, res) => {
 exports.getParticipants = async (req, res) => {
     
     try {
+        console.log("GET ATTENDANCE")
         const { event } = req.body;  
         const adminId = req.admin.id;
         const validEvents = ["CloudVerse", "CodeDuet", "Bid2Build", "CodeCrush"];
@@ -164,30 +166,46 @@ exports.getParticipants = async (req, res) => {
 };
 
 
+
 exports.getAttendance = async (req, res) => {
-    
     try {
         const { event } = req.body;
         const adminId = req.admin.id;
         const validEvents = ["CloudVerse", "CodeDuet", "Bid2Build", "CodeCrush"];
+        
         if (!validEvents.includes(event)) {
             return res.status(400).json({ message: "Invalid event" });
         }
-
         const admin = await Admin.findById(adminId);
-        if (!admin.readPermission) {
+        if (!admin || !admin.readPermission) {
             return res.status(403).json({ message: "You do not have permission to view attendance" });
         }
-
-        const participants = await Participant.find({ events: event });
-        if (participants.length === 0) {
-            return res.status(404).json({ message: "No participants found for this event" });
+        const eventDoc = await Event.findOne({ name: event });
+        if (!eventDoc) {
+            return res.status(404).json({ message: "Event not found" });
         }
-        logger.writeLog("Fetched Attendance successfully")
-        res.status(200).json({ participants });
+
+        const attendanceRecords = await Attendance.find({ event: eventDoc._id })
+            .populate('participant markingAdmin', 'UUID name'); // Populate with necessary fields
+
+        if (attendanceRecords.length === 0) {
+            return res.status(404).json({ message: "No attendance records found for this event" });
+        }
+
+        const response = attendanceRecords.map(record => ({
+            UUID: record.participant.UUID, 
+            attUUID: record.UUID, 
+            participantName: record.participant.name, 
+            markedBy: record.markingAdmin ? record.markingAdmin.name : null, 
+            time: record.time
+        }));
+
+        logger.writeLog("Fetched Attendance successfully");
+        res.status(200).json({ attendance: response });
+
     } catch (error) {
-        logger.writeLog(error)
-        console.log(error)
+        logger.writeLog(error);
+        console.error(error);
         res.status(500).json({ message: "Failed to get attendance" });
     }
 };
